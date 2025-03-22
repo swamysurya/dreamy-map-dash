@@ -1,10 +1,9 @@
 
 import api from './api';
 import { toast } from "sonner";
-import { LocationCardProps } from '../components/LocationCard';
 
 // Mock locations data
-const mockLocations: LocationCardProps[] = [
+const mockLocations = [
   {
     id: '1',
     name: 'New Delhi',
@@ -66,13 +65,13 @@ const mockUsers = [
 ];
 
 // Add delay to simulate real API latency
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 // ----- Mock API functions -----
 
 // Auth API
 export const authAPI = {
-  login: async (username: string, password: string) => {
+  login: async (username, password) => {
     try {
       // Simulate API call
       await delay(1000);
@@ -115,7 +114,7 @@ export const locationsAPI = {
     }
   },
   
-  getById: async (id: string) => {
+  getById: async (id) => {
     try {
       // Simulate API call
       await delay(800);

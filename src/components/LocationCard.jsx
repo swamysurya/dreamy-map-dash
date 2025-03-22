@@ -4,15 +4,6 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { MapPin, Navigation, ExternalLink } from 'lucide-react';
 
-export interface LocationCardProps {
-  id: string;
-  name: string;
-  description: string;
-  latitude: number;
-  longitude: number;
-  imageUrl: string;
-}
-
 const LocationCard = ({
   id,
   name,
@@ -20,7 +11,7 @@ const LocationCard = ({
   latitude,
   longitude,
   imageUrl,
-}: LocationCardProps) => {
+}) => {
   const navigate = useNavigate();
 
   const handleViewMap = () => {

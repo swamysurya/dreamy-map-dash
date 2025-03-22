@@ -62,7 +62,7 @@ const MapComponent = ({
     // Simulate loading delay
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500); // Reduced loading time for better UX
 
     // Get user's current location if requested
     if (showCurrentLocation) {
@@ -80,7 +80,7 @@ const MapComponent = ({
     }
 
     return () => clearTimeout(timer);
-  }, [showCurrentLocation]);
+  }, [showCurrentLocation, center]); // Added center as dependency to refresh on location change
 
   return (
     <div className={cn("relative rounded-lg overflow-hidden", className)}>

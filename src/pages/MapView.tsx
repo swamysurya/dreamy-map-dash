@@ -7,60 +7,9 @@ import { ChevronLeft, Maximize, Minimize, Navigation, Info, MapPin } from 'lucid
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { LocationCardProps } from '../components/LocationCard';
 import { cn } from '@/lib/utils';
+import { useLocationStore } from '../store/locationStore';
+import { toast } from 'sonner';
 
-// Mock locations data (same as in Dashboard)
-const mockLocations: LocationCardProps[] = [
-  {
-    id: '1',
-    name: 'New Delhi',
-    description: 'The capital city of India, known for its rich history and cultural heritage.',
-    latitude: 28.6139,
-    longitude: 77.2090,
-    imageUrl: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=1000&auto=format&fit=crop'
-  },
-  {
-    id: '2',
-    name: 'Mumbai',
-    description: 'The financial capital of India, home to Bollywood and bustling city life.',
-    latitude: 19.0760,
-    longitude: 72.8777,
-    imageUrl: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=1000&auto=format&fit=crop'
-  },
-  {
-    id: '3',
-    name: 'Bangalore',
-    description: 'The Silicon Valley of India, known for its tech industry and pleasant climate.',
-    latitude: 12.9716,
-    longitude: 77.5946,
-    imageUrl: 'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?q=80&w=1000&auto=format&fit=crop'
-  },
-  {
-    id: '4',
-    name: 'Kolkata',
-    description: 'The cultural capital of India, famous for its literature, art, and food.',
-    latitude: 22.5726,
-    longitude: 88.3639,
-    imageUrl: 'https://images.unsplash.com/photo-1558431382-27e303142255?q=80&w=1000&auto=format&fit=crop'
-  },
-  {
-    id: '5',
-    name: 'Chennai',
-    description: 'A major cultural and economic center in South India, known for its temples.',
-    latitude: 13.0827,
-    longitude: 80.2707,
-    imageUrl: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=1000&auto=format&fit=crop'
-  },
-  {
-    id: '6',
-    name: 'Jaipur',
-    description: 'The Pink City, known for its stunning palaces, forts and vibrant culture.',
-    latitude: 26.9124,
-    longitude: 75.7873,
-    imageUrl: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?q=80&w=1000&auto=format&fit=crop'
-  },
-];
-
-// India's default center
 const INDIA_CENTER: [number, number] = [20.5937, 78.9629];
 
 const MapView = () => {
@@ -71,6 +20,7 @@ const MapView = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [location, setLocation] = useState<LocationCardProps | null>(null);
   const [loading, setLoading] = useState(true);
+  const { fetchLocationById } = useLocationStore();
 
   useEffect(() => {
     if (!isAuthenticated) return;
@@ -91,30 +41,33 @@ const MapView = () => {
 
     // If not in state, fetch by ID
     if (id) {
-      // Simulate API fetch
+      // Use the location store to fetch
       const fetchLocation = async () => {
         setLoading(true);
         
-        // Simulate network delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        const foundLocation = mockLocations.find(loc => loc.id === id);
-        
-        if (foundLocation) {
-          setLocation(foundLocation);
-        } else {
-          // If not found, use default India center
-          setLocation({
-            id: '0',
-            name: 'India',
-            description: 'Explore the diverse landscape and rich culture of India.',
-            latitude: INDIA_CENTER[0],
-            longitude: INDIA_CENTER[1],
-            imageUrl: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=1000&auto=format&fit=crop',
-          });
+        try {
+          const locationData = await fetchLocationById(id);
+          
+          if (locationData) {
+            setLocation(locationData);
+          } else {
+            // If not found, use default India center
+            setLocation({
+              id: '0',
+              name: 'India',
+              description: 'Explore the diverse landscape and rich culture of India.',
+              latitude: INDIA_CENTER[0],
+              longitude: INDIA_CENTER[1],
+              imageUrl: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=1000&auto=format&fit=crop',
+            });
+            toast.warning("Location not found, showing default view");
+          }
+        } catch (error) {
+          console.error("Error fetching location:", error);
+          toast.error("Failed to load location data");
+        } finally {
+          setLoading(false);
         }
-        
-        setLoading(false);
       };
       
       fetchLocation();
@@ -130,7 +83,7 @@ const MapView = () => {
       });
       setLoading(false);
     }
-  }, [id, state, isAuthenticated]);
+  }, [id, state, isAuthenticated, fetchLocationById]);
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
@@ -144,6 +97,10 @@ const MapView = () => {
         setIsFullscreen(false);
       }
     }
+  };
+
+  const handleBackToDashboard = () => {
+    navigate('/dashboard');
   };
 
   if (!isAuthenticated) {
@@ -168,7 +125,7 @@ const MapView = () => {
           <Button
             variant="ghost"
             className="mb-4"
-            onClick={() => navigate('/dashboard')}
+            onClick={handleBackToDashboard}
           >
             <ChevronLeft className="h-4 w-4 mr-2" />
             Back to Dashboard
@@ -178,11 +135,17 @@ const MapView = () => {
             {/* Location Image */}
             <div className="sm:w-1/3">
               <div className="relative rounded-lg overflow-hidden h-48 sm:h-full">
-                <img
-                  src={location?.imageUrl}
-                  alt={location?.name}
-                  className="w-full h-full object-cover"
-                />
+                {location?.imageUrl && (
+                  <img
+                    src={location.imageUrl}
+                    alt={location?.name || "Location"}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      // Fallback if image fails to load
+                      e.currentTarget.src = 'https://via.placeholder.com/600x400?text=No+Image';
+                    }}
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 <div className="absolute bottom-3 left-3 text-white">
                   <div className="flex items-center mb-1">

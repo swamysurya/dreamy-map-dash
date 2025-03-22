@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useLocation, useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
@@ -7,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ChevronLeft, Maximize, Minimize, Navigation, Info, MapPin } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { LocationCardProps } from '../components/LocationCard';
+import { cn } from '@/lib/utils';
 
 // Mock locations data (same as in Dashboard)
 const mockLocations: LocationCardProps[] = [

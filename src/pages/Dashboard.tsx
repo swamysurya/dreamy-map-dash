@@ -1,9 +1,8 @@
-
 import { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import LocationCard, { LocationCardProps } from '../components/LocationCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { MapSearch, Map, Info, MapPin } from 'lucide-react';
+import { Search, Map, Info, MapPin } from 'lucide-react';
 
 // Mock locations data
 const mockLocations: LocationCardProps[] = [
@@ -145,7 +144,7 @@ const Dashboard = () => {
               </div>
             ) : (
               <div className="text-center py-12">
-                <MapSearch className="h-12 w-12 mx-auto text-gray-400 mb-4" />
+                <Search className="h-12 w-12 mx-auto text-gray-400 mb-4" />
                 <h3 className="text-xl font-medium mb-2">No locations found</h3>
                 <p className="text-gray-500">Try changing your filter criteria</p>
               </div>
@@ -167,7 +166,7 @@ const Dashboard = () => {
               </div>
             ) : (
               <div className="text-center py-12">
-                <MapSearch className="h-12 w-12 mx-auto text-gray-400 mb-4" />
+                <Search className="h-12 w-12 mx-auto text-gray-400 mb-4" />
                 <h3 className="text-xl font-medium mb-2">No locations in North India</h3>
                 <p className="text-gray-500">Try another region</p>
               </div>
@@ -189,7 +188,7 @@ const Dashboard = () => {
               </div>
             ) : (
               <div className="text-center py-12">
-                <MapSearch className="h-12 w-12 mx-auto text-gray-400 mb-4" />
+                <Search className="h-12 w-12 mx-auto text-gray-400 mb-4" />
                 <h3 className="text-xl font-medium mb-2">No locations in South India</h3>
                 <p className="text-gray-500">Try another region</p>
               </div>

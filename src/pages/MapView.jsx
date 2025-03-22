@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useLocation, useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
@@ -5,20 +6,19 @@ import MapComponent from '../components/Map';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, Maximize, Minimize, Navigation, Info, MapPin } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LocationCardProps } from '../components/LocationCard';
 import { cn } from '@/lib/utils';
 import { useLocationStore } from '../store/locationStore';
 import { toast } from 'sonner';
 
-const INDIA_CENTER: [number, number] = [20.5937, 78.9629];
+const INDIA_CENTER = [20.5937, 78.9629];
 
 const MapView = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams();
   const { state } = useLocation();
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [location, setLocation] = useState<LocationCardProps | null>(null);
+  const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(true);
   const { fetchLocationById } = useLocationStore();
 

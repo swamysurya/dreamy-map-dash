@@ -1,19 +1,8 @@
 
 import { create } from 'zustand';
-import { LocationCardProps } from '../components/LocationCard';
 import { locationsAPI } from '../services/mockApi';
 
-interface LocationState {
-  locations: LocationCardProps[];
-  selectedLocation: LocationCardProps | null;
-  isLoading: boolean;
-  error: string | null;
-  fetchLocations: () => Promise<void>;
-  fetchLocationById: (id: string) => Promise<LocationCardProps | null>;
-  filterLocationsByRegion: (region: 'all' | 'north' | 'south') => LocationCardProps[];
-}
-
-export const useLocationStore = create<LocationState>((set, get) => ({
+export const useLocationStore = create((set, get) => ({
   locations: [],
   selectedLocation: null,
   isLoading: false,
@@ -45,7 +34,7 @@ export const useLocationStore = create<LocationState>((set, get) => ({
     }
   },
   
-  fetchLocationById: async (id: string) => {
+  fetchLocationById: async (id) => {
     set({ isLoading: true, error: null });
     
     try {
@@ -74,7 +63,7 @@ export const useLocationStore = create<LocationState>((set, get) => ({
     }
   },
   
-  filterLocationsByRegion: (region: 'all' | 'north' | 'south') => {
+  filterLocationsByRegion: (region) => {
     const { locations } = get();
     
     if (region === 'all') return locations;

@@ -4,28 +4,14 @@ import { persist } from 'zustand/middleware';
 import { authAPI } from '../services/mockApi';
 import { toast } from "sonner";
 
-type User = {
-  id: string;
-  username: string;
-  token: string;
-};
-
-interface AuthState {
-  user: User | null;
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  login: (username: string, password: string) => Promise<boolean>;
-  logout: () => void;
-}
-
-export const useAuthStore = create<AuthState>()(
+export const useAuthStore = create(
   persist(
     (set) => ({
       user: null,
       isAuthenticated: false,
       isLoading: false,
       
-      login: async (username: string, password: string) => {
+      login: async (username, password) => {
         set({ isLoading: true });
         
         try {

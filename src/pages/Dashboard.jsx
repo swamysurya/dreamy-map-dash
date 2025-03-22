@@ -22,7 +22,7 @@ const Dashboard = () => {
   }, [fetchLocations]);
 
   // Get filtered locations based on active tab
-  const filteredLocations = filterLocationsByRegion(activeTab as 'all' | 'north' | 'south');
+  const filteredLocations = filterLocationsByRegion(activeTab);
 
   return (
     <div className="min-h-screen pt-16 pb-12 animated-background">

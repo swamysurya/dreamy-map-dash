@@ -111,7 +111,7 @@ const Login = () => {
             
             <CardFooter className="flex justify-center border-t bg-gray-50/50 px-8 py-4">
               <p className="text-sm text-gray-600">
-                Demo credentials: any username, password: "password"
+                Demo credentials: username: "user", password: "password"
               </p>
             </CardFooter>
           </Card>

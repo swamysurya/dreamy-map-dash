@@ -23,7 +23,7 @@ const Login = () => {
     
     setIsLoading(false);
     if (success) {
-      navigate("/dashboard");
+      navigate("/");
     }
   };
 

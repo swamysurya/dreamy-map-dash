@@ -24,10 +24,9 @@ const App = () => (
         <BrowserRouter>
           <Navbar />
           <Routes>
-            
             <Route path="/login" element={<Login />} />
             <Route 
-              path="/dashboard" 
+              path="/" 
               element={
                 <ProtectedRoute>
                   <Dashboard />

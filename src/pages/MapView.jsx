@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation, useParams, useNavigate, Navigate } from 'react-router-dom';
+import { useLocation, useParams, Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import MapComponent from '../components/Map';
 import { Button } from '../components/ui/button';
@@ -14,7 +14,6 @@ const INDIA_CENTER = [20.5937, 78.9629];
 const MapView = () => {
   const { id } = useParams();
   const { state } = useLocation();
-  const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [location, setLocation] = useState(null);
@@ -98,9 +97,7 @@ const MapView = () => {
     }
   };
 
-  const handleBackToDashboard = () => {
-    navigate('/dashboard');
-  };
+ 
 
   if (!isAuthenticated) {
     return <Navigate to="/login" />;
@@ -116,20 +113,11 @@ const MapView = () => {
       </div>
     );
   }
-
+  console.log("isFullscreen:", isFullscreen);
   return (
     <div className={`min-h-screen ${isFullscreen ? 'pt-0' : 'pt-16'} animated-background`}>
       {!isFullscreen && (
         <div className="container px-4 mx-auto py-4">
-          <Button
-            variant="ghost"
-            className="mb-4"
-            onClick={handleBackToDashboard}
-          >
-            <ChevronLeft className="h-4 w-4 mr-2" />
-            Back to Dashboard
-          </Button>
-          
           <div className="flex flex-col sm:flex-row gap-6 mb-6">
             {/* Location Image */}
             <div className="sm:w-1/3">

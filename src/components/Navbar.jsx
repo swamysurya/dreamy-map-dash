@@ -36,7 +36,7 @@ const Navbar = () => {
       }`}
     >
       <div className="container px-4 mx-auto flex justify-between items-center">
-        <Link to="dashboard" className="flex items-center space-x-2">
+        <Link to="/" className="flex items-center space-x-2">
           <Map className="h-6 w-6 text-primary" />
           <span className="font-bold text-xl">MapDash</span>
         </Link>
@@ -46,7 +46,7 @@ const Navbar = () => {
           {isAuthenticated ? (
             <>
               <Link 
-                to="/dashboard" 
+                to="/" 
                 className={`transition-colors duration-200 hover:text-primary ${
                   location.pathname === '/dashboard' ? 'text-primary font-medium' : 'text-gray-700'
                 }`}
@@ -85,7 +85,7 @@ const Navbar = () => {
             {isAuthenticated ? (
               <>
                 <Link 
-                  to="/dashboard" 
+                  to="/" 
                   className={`flex items-center py-2 px-4 rounded-md transition-colors ${
                     location.pathname === '/dashboard' 
                       ? 'bg-primary/10 text-primary' 

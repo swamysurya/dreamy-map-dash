@@ -1,69 +1,27 @@
-# Welcome to your Lovable project
+# Dreamy Map Dash
 
-## Project info
+Dreamy Map Dash is a React-based web application that provides an interactive map dashboard. It allows users to explore various locations, view detailed information, and navigate through different map views.
 
-**URL**: https://lovable.dev/projects/af82b733-d105-45b1-b962-ab591e571e01
+## Features
 
-## How can I edit this code?
+- **Interactive Map**: Explore locations with an interactive map.
+- **Location Details**: View detailed information about each location.
+- **Authentication**: Secure login and protected routes.
+- **Responsive Design**: Optimized for both desktop and mobile devices.
+- **Full-Screen Mode**: Toggle full-screen mode for an immersive experience.
 
-There are several ways of editing your application.
+## Technologies Used
 
-**Use Lovable**
+- **React**: JavaScript library for building user interfaces.
+- **React Router**: Declarative routing for React applications.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **Radix UI**: Accessible, unstyled UI components for building high-quality design systems and web apps.
+- **React Query**: Data-fetching library for React.
+- **Leaflet**: Open-source JavaScript library for mobile-friendly interactive maps.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/af82b733-d105-45b1-b962-ab591e571e01) and start prompting.
+## Installation
 
-Changes made via Lovable will be committed automatically to this repo.
+1. Clone the repository:
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/af82b733-d105-45b1-b962-ab591e571e01) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+   ```sh
+   git clone https://github.com/your-username/dreamy-map-dash.git

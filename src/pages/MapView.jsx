@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { useLocation, useParams, useNavigate, Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import MapComponent from '../components/Map';
-import { Button } from '@/components/ui/button';
+import { Button } from '../components/ui/button';
 import { ChevronLeft, Maximize, Minimize, Navigation, Info, MapPin } from 'lucide-react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { cn } from '@/lib/utils';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs.jsx';
+import { cn } from '../lib/utils';
 import { useLocationStore } from '../store/locationStore';
 import { toast } from 'sonner';
 
@@ -26,18 +26,18 @@ const MapView = () => {
 
     // Try to get location from router state first
     if (state && state.name && state.latitude && state.longitude) {
+      console.log("Using state location:", state);
       setLocation({
         id: id || '0',
         name: state.name,
         description: state.description || 'No description available',
         latitude: state.latitude,
         longitude: state.longitude,
-        imageUrl: state.imageUrl || 'https://via.placeholder.com/600x400?text=No+Image',
+        imageUrl: state.imageUrl || 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=1000&auto=format&fit=crop',
       });
       setLoading(false);
       return;
     }
-
     // If not in state, fetch by ID
     if (id) {
       // Use the location store to fetch

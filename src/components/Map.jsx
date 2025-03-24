@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap, ZoomControl } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import { cn } from '@/lib/utils';
+import { cn } from '../lib/utils';
 
 // Fix for Leaflet marker icons
 delete (L.Icon.Default.prototype)._getIconUrl;

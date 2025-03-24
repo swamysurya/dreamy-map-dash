@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { Button } from '@/components/ui/button';
+import { Button } from '../components/ui/button';
 import { Menu, X, Map, LayoutDashboard, LogOut } from 'lucide-react';
 
 const Navbar = () => {
@@ -36,7 +36,7 @@ const Navbar = () => {
       }`}
     >
       <div className="container px-4 mx-auto flex justify-between items-center">
-        <Link to="/" className="flex items-center space-x-2">
+        <Link to="dashboard" className="flex items-center space-x-2">
           <Map className="h-6 w-6 text-primary" />
           <span className="font-bold text-xl">MapDash</span>
         </Link>

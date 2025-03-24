@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useLocationStore } from '../store/locationStore';
 import LocationCard from '../components/LocationCard';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs.jsx';
 import { Search, Map, Info, MapPin } from 'lucide-react';
 
 const Dashboard = () => {
